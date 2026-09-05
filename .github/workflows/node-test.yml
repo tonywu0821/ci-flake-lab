@@ -1,0 +1,33 @@
+name: node-test
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '17 4 * * 1'
+
+jobs:
+  # Two jobs rather than two steps: one log per format, which is the point.
+  # Node's default reporter changed in 22, so neither is left to the runtime.
+  spec:
+    name: node --test (spec reporter)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm run test:spec
+        working-directory: node-test
+
+  tap:
+    name: node --test (tap reporter)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm run test:tap
+        working-directory: node-test

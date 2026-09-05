@@ -53,6 +53,17 @@ red and produces nothing useful — mixing them in would spoil the reliable ones
 | `mocha` | numbers its failures and spreads the suite path over several indented lines rather than putting it on one |
 | `playwright` | two projects, so one test failing is two reported lines; the numbered failure blocks are padded out to the terminal width with box-drawing characters, and the padding lands inside the title |
 | `pytest` | `file::Class::test` — a third separator convention — plus parametrised cases carrying their argument in brackets, where two names differ only inside those brackets |
+| `node-test` | node's built-in runner, in both of its formats: `tap` (`not ok N - <name>` with a YAML block) and `spec`, which looks much more like jest. Which one you get by default changed in Node 22 |
+| `rust` | `cargo test`, which lists failures twice — once inline as `---- <path> stdout ----` and once as a bare list under `failures:` |
+| `rspec` | joins the describe path with spaces and no separator at all, so nothing marks where the suite ends and the example begins |
+| `phpunit` | names a failure `ClassName::methodName` under a numbered heading, with `--testdox` producing a completely different, prose-like rendering of the same run |
+| `maven` | Surefire, naming the test `ClassName.methodName` — while `@DisplayName` gives the same test a second, human name that appears elsewhere in the same log |
+| `gradle` | the same JUnit tests reported as `ClassName > methodName FAILED`, and only because `testLogging` was configured — by default Gradle says almost nothing, so two projects on the same runner can produce entirely different logs |
+| `dotnet` | fully qualified `Namespace.Class.Method`, with theory cases carrying their arguments in brackets |
+
+Every fixture has the same shape — a passing test, a test that fails only on the
+first attempt, and a nested suite — so what differs between two logs is the format
+and nothing else.
 
 The specs also carry a long title, a title containing a comma, a title using jest's
 `›` separator, and a suite that fails to load rather than a test that fails. Each of

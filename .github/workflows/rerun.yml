@@ -20,6 +20,13 @@ on:
         mocha,
         playwright,
         pytest,
+        rust,
+        rspec,
+        phpunit,
+        maven,
+        gradle,
+        dotnet,
+        node-test,
       ]
     types: [completed]
 
