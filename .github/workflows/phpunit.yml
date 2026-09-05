@@ -7,14 +7,26 @@ on:
   schedule:
     - cron: '17 4 * * 1'
 
+# Two jobs, because --testdox is not a variant of the default output — it renames
+# every test into prose and drops the class and method names entirely.
 jobs:
-  test:
+  default:
     name: phpunit
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       # PHP is preinstalled on the runner image. The phar avoids needing composer
       # or a third-party setup action for a fixture this small.
+      - run: wget -q -O phpunit https://phar.phpunit.de/phpunit-11.phar && chmod +x phpunit
+        working-directory: phpunit
+      - run: ./phpunit
+        working-directory: phpunit
+
+  testdox:
+    name: phpunit (testdox)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
       - run: wget -q -O phpunit https://phar.phpunit.de/phpunit-11.phar && chmod +x phpunit
         working-directory: phpunit
       - run: ./phpunit --testdox
