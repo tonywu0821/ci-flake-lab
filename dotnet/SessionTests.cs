@@ -16,6 +16,11 @@ public class SessionTests
     [Fact]
     public void RejectsATokenSignedWithTheWrongKey()
     {
-        Assert.Throws<ArgumentException>(() => throw new ArgumentException("invalid signature"));
+        // A statement lambda, not an expression one: `() => throw ...` is inferred as
+        // Func<Task> and picks the obsolete async overload.
+        Assert.Throws<ArgumentException>(() =>
+        {
+            throw new ArgumentException("invalid signature");
+        });
     }
 }
