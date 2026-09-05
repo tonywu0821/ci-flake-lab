@@ -1,0 +1,6 @@
+{
+  "name": "@ci-flake-lab/playwright",
+  "private": true,
+  "scripts": { "test": "playwright test" },
+  "devDependencies": { "@playwright/test": "^1.49.1" }
+}

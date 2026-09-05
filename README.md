@@ -49,6 +49,10 @@ red and produces nothing useful — mixing them in would spoil the reliable ones
 | `cypress` | failures printed twice, in two shapes, disagreeing about how much of the describe path they show |
 | `go` | `gotestsum --format testname`, including a failing subtest, which fails its parent too so the same failure is reported at two levels |
 | `jest-random` | the same thing when the flake is real rather than manufactured |
+| `vitest` | names a test `file > suite > test`, where jest uses `›` between suite levels only — close enough to look the same at a glance |
+| `mocha` | numbers its failures and spreads the suite path over several indented lines rather than putting it on one |
+| `playwright` | two projects, so one test failing is two reported lines; the numbered failure blocks are padded out to the terminal width with box-drawing characters, and the padding lands inside the title |
+| `pytest` | `file::Class::test` — a third separator convention — plus parametrised cases carrying their argument in brackets, where two names differ only inside those brackets |
 
 The specs also carry a long title, a title containing a comma, a title using jest's
 `›` separator, and a suite that fails to load rather than a test that fails. Each of

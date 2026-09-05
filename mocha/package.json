@@ -1,0 +1,6 @@
+{
+  "name": "@ci-flake-lab/mocha",
+  "private": true,
+  "scripts": { "test": "mocha test/**/*.spec.js" },
+  "devDependencies": { "chai": "^4.5.0", "mocha": "^10.8.2" }
+}

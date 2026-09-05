@@ -8,7 +8,19 @@ name: rerun
 # workflow_run only ever runs from the default branch, whatever branch triggered it.
 on:
   workflow_run:
-    workflows: [jest-default, jest-github-actions, jest-silent, jest-random, cypress, go]
+    workflows:
+      [
+        jest-default,
+        jest-github-actions,
+        jest-silent,
+        jest-random,
+        cypress,
+        go,
+        vitest,
+        mocha,
+        playwright,
+        pytest,
+      ]
     types: [completed]
 
 permissions:

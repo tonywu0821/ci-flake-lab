@@ -2,3 +2,7 @@ node_modules/
 dist/
 cypress/screenshots/
 cypress/videos/
+playwright/test-results/
+playwright/playwright-report/
+__pycache__/
+.pytest_cache/
