@@ -16,11 +16,10 @@ public class SessionTests
     [Fact]
     public void RejectsATokenSignedWithTheWrongKey()
     {
-        // A statement lambda, not an expression one: `() => throw ...` is inferred as
-        // Func<Task> and picks the obsolete async overload.
-        Assert.Throws<ArgumentException>(() =>
-        {
-            throw new ArgumentException("invalid signature");
-        });
+        // The delegate type is declared rather than inferred: a lambda whose body is
+        // only a throw converts to any delegate, and overload resolution picks the
+        // obsolete Func<Task> one.
+        Action signWithTheWrongKey = () => throw new ArgumentException("invalid signature");
+        Assert.Throws<ArgumentException>(signWithTheWrongKey);
     }
 }
