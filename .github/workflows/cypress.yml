@@ -1,0 +1,22 @@
+name: cypress
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '17 4 * * 1'
+
+jobs:
+  e2e:
+    name: e2e tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install --no-package-lock
+        working-directory: cypress
+      - run: npx cypress run --env GITHUB_RUN_ATTEMPT=${{ github.run_attempt }}
+        working-directory: cypress

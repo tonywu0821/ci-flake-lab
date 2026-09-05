@@ -1,0 +1,25 @@
+name: jest-random
+
+# Kept separate from the deterministic fixtures: a genuinely random test can fail
+# on the second attempt too, leaving the run red and producing no rerun-green
+# candidate. Mixing them would poison the reliable ones.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '41 4 * * *'
+
+jobs:
+  unit-tests:
+    name: unit tests (genuinely flaky)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install --no-package-lock
+        working-directory: jest
+      - run: npm run test:random
+        working-directory: jest

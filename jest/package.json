@@ -1,0 +1,13 @@
+{
+  "name": "@ci-flake-lab/jest",
+  "private": true,
+  "scripts": {
+    "test:default": "jest --config jest.default.config.js",
+    "test:github-actions": "jest --config jest.github-actions.config.js",
+    "test:silent": "jest --config jest.silent.config.js",
+    "test:random": "jest --config jest.random.config.js"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}

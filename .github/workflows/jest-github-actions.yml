@@ -1,0 +1,26 @@
+name: jest-github-actions
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  # A public repo's scheduled workflows are disabled after 60 days without any
+  # activity in the repo, so this doubles as the thing that keeps the repo awake.
+  schedule:
+    - cron: '17 4 * * 1'
+
+jobs:
+  unit-tests:
+    name: unit tests (github-actions reporter)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: jest/package.json
+      - run: npm install --no-package-lock
+        working-directory: jest
+      - run: npm run test:github-actions
+        working-directory: jest
